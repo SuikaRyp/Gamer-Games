@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bleach Vs Naruto - Anime Fighting Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #ff9a00, #ff2e00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(255, 46, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #ffcc00;
+            margin-bottom: 5px;
+        }
+        
+        .game-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+        
+        .game-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+        
+        .game-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .game-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .game-details {
+            flex: 2;
+            min-width: 300px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #ffcc00;
+            border-bottom: 2px solid #ffcc00;
+            padding-bottom: 5px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .info-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, background 0.3s ease;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .info-card h3 {
+            color: #ff9a00;
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+        
+        .download-section {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+        
+        .download-instructions {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .download-instructions ol {
+            margin-left: 20px;
+        }
+        
+        .download-instructions li {
+            margin-bottom: 10px;
+        }
+        
+        .password-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            text-align: center;
+            border: 1px dashed #ffcc00;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .password {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffcc00;
+            letter-spacing: 2px;
+        }
+        
+        .disclaimer {
+            background: rgba(255, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 5px solid #ff3333;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, #ff9a00, #ff2e00);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 46, 0, 0.4);
+            cursor: pointer;
+            border: none;
+            font-size: 1.1rem;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 46, 0, 0.6);
+        }
+        
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-android {
+            background: linear-gradient(90deg, #3ddc84, #34a853);
+            box-shadow: 0 5px 15px rgba(52, 168, 83, 0.4);
+        }
+        
+        .btn-android:hover {
+            box-shadow: 0 8px 20px rgba(52, 168, 83, 0.6);
+        }
+        
+        .btn-pc {
+            background: linear-gradient(90deg, #4285f4, #1a73e8);
+            box-shadow: 0 5px 15px rgba(26, 115, 232, 0.4);
+        }
+        
+        .btn-pc:hover {
+            box-shadow: 0 8px 20px rgba(26, 115, 232, 0.6);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+        
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+        
+        .music-control:hover {
+            transform: scale(1.1);
+        }
+        
+        .music-control i {
+            font-size: 24px;
+            color: #ffcc00;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .visible {
+            transform: translateY(0) !important;
+            opacity: 1 !important;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .game-info {
+                flex-direction: column;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+            }
+            
+            .music-control {
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Musik akan diputar otomatis -->
+    <audio id="backgroundMusic" loop>
+        <!-- Ganti dengan link musik Anda -->
+        <source src="https://files.catbox.moe/sqm5k1.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+    
+    <div class="music-control" id="musicToggle">
+        <i class="fas fa-volume-up"></i>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>NARUTO MOBILE FIGHTER PIXEL B.N.O</h1>
+            <p class="subtitle">MUGEN ANDROID OFFLINE</p>
+        </header>
+        
+        <div class="game-info">
+            <div class="game-image">
+                <img src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Bleach Vs Naruto Game">
+            </div>
+            
+            <div class="game-details">
+                <h2 class="section-title">Tentang Game</h2>
+                <p>Bleach Vs Naruto adalah game pertarungan anime 2D online gratis yang dikembangkan oleh perusahaan China SDplay yang dapat dimainkan di browser internet, PC, dan Android. Ini adalah game pertarungan anime crossover yang menampilkan karakter dari Bleach dan Naruto Shippuden dengan karakter tamu Kenshin Himura dari Rurouni Kenshin.</p>
+                
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Ukuran Versi Android</h3>
+                        <p>540 MB</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Ukuran Versi PC</h3>
+                        <p>413 MB</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Versi</h3>
+                        <p>B.N.O Anime Mugen V1.06</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Pembuat</h3>
+                        <p>DAZZLE</p>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <h3>Spesifikasi Minimal</h3>
+                    <p>Memori internal minimal 6GB atau 7GB agar tidak gagal install</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="download-section">
+            <h2 class="section-title">Download Game</h2>
+            <p>Pilih versi yang ingin Anda download:</p>
+            
+            <div class="btn-container">
+                <a href="https://subs4unlock.id/Z95NRs" class="btn btn-android">DOWNLOAD ANDROID (540MB)</a>
+                <a href="https://bit.ly/3EO64KZ" class="btn btn-pc">DOWNLOAD PC (413MB)</a>
+            </div>
+            
+            <div class="download-instructions">
+                <h3>Cara Download & Install:</h3>
+                <ol>
+                    <li>Klik Link nya lalu klik OPEN</li>
+                    <li>Tunggu 10 detik lalu klik NEXT</li>
+                    <li>Klik OPEN, tunggu hingga selesai</li>
+                    <li>Ekstrak file menggunakan App Zarchive</li>
+                    <li>Setelah ekstrak, instal APK nya</li>
+                </ol>
+            </div>
+            
+            <div class="password-box">
+                <h3>Password untuk Ekstrak:</h3>
+                <p class="password">YOUTUBEREVIEWGAMINGHD</p>
+            </div>
+        </div>
+        
+        <div class="disclaimer">
+            <h2 class="section-title">Disclaimer</h2>
+            <p>Konten yang disajikan dalam video ini hanya untuk tujuan edukasi dan informasi. Kami tidak mengklaim kepemilikan atas materi berhak cipta apa pun yang digunakan dalam video ini, seperti gambar, musik, atau klip video. Semua hak dan kredit diberikan kepada pemilik masing-masing. Kami telah menggunakan materi ini di bawah pedoman 'penggunaan wajar' untuk komentar, kritik, dan tujuan transformatif.</p>
+        </div>
+        
+        <footer>
+            <p>© 2023 Anime Fighting Game Showcase. All game content belongs to their respective owners.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Fungsi untuk memutar musik otomatis
+        document.addEventListener('DOMContentLoaded', function() {
+            const music = document.getElementById('backgroundMusic');
+            const musicToggle = document.getElementById('musicToggle');
+            const musicIcon = musicToggle.querySelector('i');
+            
+            // Coba putar musik otomatis
+            const playMusic = () => {
+                music.volume = 0.5;
+                music.play().catch(e => {
+                    console.log('Autoplay prevented. User interaction required.');
+                });
+            };
+            
+            // Tunggu sedikit kemudian coba putar
+            setTimeout(playMusic, 1000);
+            
+            // Toggle musik saat ikon diklik
+            musicToggle.addEventListener('click', function() {
+                if (music.paused) {
+                    music.play();
+                    musicIcon.className = 'fas fa-volume-up';
+                } else {
+                    music.pause();
+                    musicIcon.className = 'fas fa-volume-mute';
+                }
+            });
+            
+            // Animasi scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Jika elemen memiliki anak dengan animasi bertahap
+                        if (entry.target.classList.contains('info-grid')) {
+                            const cards = entry.target.querySelectorAll('.info-card');
+                            cards.forEach((card, index) => {
+                                setTimeout(() => {
+                                    card.classList.add('visible');
+                                }, index * 100);
+                            });
+                        }
+                        
+                        if (entry.target.classList.contains('download-section')) {
+                            const buttons = entry.target.querySelectorAll('.btn');
+                            const instructions = entry.target.querySelector('.download-instructions');
+                            const passwordBox = entry.target.querySelector('.password-box');
+                            
+                            buttons.forEach((btn, index) => {
+                                setTimeout(() => {
+                                    btn.classList.add('visible');
+                                }, index * 150);
+                            });
+                            
+                            setTimeout(() => {
+                                instructions.classList.add('visible');
+                            }, 400);
+                            
+                            setTimeout(() => {
+                                passwordBox.classList.add('visible');
+                            }, 600);
+                        }
+                    }
+                });
+            }, observerOptions);
+            
+            // Terapkan animasi pada elemen
+            const animatedElements = document.querySelectorAll(
+                '.game-info, .download-section, .disclaimer, footer, .info-grid'
+            );
+            
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Animasi untuk elemen khusus
+            const infoCards = document.querySelectorAll('.info-card');
+            infoCards.forEach(card => {
+                card.style.transition = 'transform 0.6s ease, opacity 0.6s ease, background 0.3s ease';
+            });
+            
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(btn => {
+                btn.style.transition = 'transform 0.5s ease, opacity 0.5s ease, box-shadow 0.3s ease';
+            });
+            
+            const instructions = document.querySelector('.download-instructions');
+            instructions.style.transition = 'transform 0.6s ease, opacity 0.6s ease';
+            
+            const passwordBox = document.querySelector('.password-box');
+            passwordBox.style.transition = 'transform 0.6s ease, opacity 0.6s ease';
+        });
+        
+        // Smooth scroll untuk semua link internal
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
